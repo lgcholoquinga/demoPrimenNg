@@ -1,0 +1,19 @@
+<div class="flex gap-1 items-center">
+  @if (controlName()) {
+    <p-radio-button
+      [formControlName]="controlName()!"
+      [inputId]="id()"
+      [name]="name()"
+      [value]="value()"
+    />
+  } @else {
+    <p-radio-button
+      [(ngModel)]="selectedModel"
+      [inputId]="id()"
+      [name]="name()"
+      [value]="value()"
+      [disabled]="disabled()"
+    />
+  }
+  <label [for]="id()">{{ label() }}</label>
+</div>

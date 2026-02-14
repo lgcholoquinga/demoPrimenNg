@@ -1,0 +1,29 @@
+<h2 class="text-lg font-semibold mb-2">Reactive Forms (ControlContainer)</h2>
+<div class="flex gap-2 items-center mt-4">
+  <form [formGroup]="form">
+    @for (item of ingredients(); track item.id) {
+      <lgc-radio-button
+        controlName="ingre"
+        [name]="'ingre'"
+        [value]="item.value"
+        [id]="item.id"
+        [label]="item.label"
+      />
+    }
+  </form>
+  <p class="mt-2 text-sm text-gray-600">Selected: {{ form.controls.ingre.value || 'none' }}</p>
+</div>
+
+<h2 class="text-lg font-semibold mb-2 mt-6">Model (selectedModel)</h2>
+<div class="flex gap-2 items-center mt-4">
+  @for (item of ingredients(); track item.id) {
+    <lgc-radio-button
+      [(selectedModel)]="selectedIngredient"
+      [name]="'ingredient'"
+      [value]="item.value"
+      [id]="'model_' + item.id"
+      [label]="item.label"
+    />
+  }
+  <p class="mt-2 text-sm text-gray-600">Selected: {{ selectedIngredient() || 'none' }}</p>
+</div>

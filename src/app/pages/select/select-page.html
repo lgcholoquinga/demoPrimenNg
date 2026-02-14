@@ -1,0 +1,33 @@
+<div class="mt-6 flex flex-col gap-6 items-center">
+  <!-- 1. Reactive Form (formControl) -->
+  <section class="w-full max-w-xs">
+    <h2 class="text-lg font-semibold mb-2">Reactive Form</h2>
+    <form [formGroup]="form">
+      <lgc-select
+        formControlName="city"
+        [options]="cities()"
+        optionLabel="name"
+        placeholder="Select a city"
+        optionValue="code"
+      />
+    </form>
+  </section>
+
+  <!-- 2. Template-driven (ngModel) -->
+  <section class="w-full max-w-xs">
+    <h2 class="text-lg font-semibold mb-2">NgModel</h2>
+    <lgc-select
+      [(ngModel)]="selectedCity"
+      [options]="cities()"
+      optionLabel="name"
+      placeholder="Select a city"
+    />
+    <p class="mt-1 text-sm text-gray-600">Value: {{ selectedCity()?.name ?? 'none' }}</p>
+  </section>
+
+  <!-- 3. Plain (sin form binding) -->
+  <section class="w-full max-w-xs">
+    <h2 class="text-lg font-semibold mb-2">Standalone (sin form)</h2>
+    <lgc-select [options]="cities()" optionLabel="name" placeholder="Select a city" />
+  </section>
+</div>
