@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'input',
+    loadComponent: () => import('./pages/input/input-page'),
+  },
+  {
     path: 'select',
     loadComponent: () => import('./pages/select/select-page'),
   },

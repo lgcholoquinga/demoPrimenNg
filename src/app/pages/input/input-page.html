@@ -1,0 +1,123 @@
+<div class="p-6 flex flex-col gap-10 max-w-2xl mx-auto">
+  <h1 class="text-2xl font-bold">lgc-input – demos de uso</h1>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       1. REACTIVE FORMS  (formControl / formControlName)
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="reactive-heading">
+    <h2 id="reactive-heading" class="text-lg font-semibold mb-4">1. Reactive form</h2>
+
+    <form [formGroup]="form" class="flex flex-col gap-4">
+      <lgc-input
+        formControlName="email"
+        type="email"
+        label="Correo electrónico"
+        placeholder="usuario@ejemplo.com"
+        hint="Usaremos este correo para enviarte confirmaciones."
+        [required]="true"
+        [invalid]="emailCtrl.invalid && emailCtrl.touched"
+        [fluid]="true"
+      />
+      @if (emailCtrl.invalid && emailCtrl.touched) {
+        <p class="text-red-500 text-sm -mt-3" role="alert">
+          @if (emailCtrl.hasError('required')) {
+            El correo es obligatorio.
+          } @else if (emailCtrl.hasError('email')) {
+            Introduce un correo válido.
+          }
+        </p>
+      }
+
+      <lgc-input
+        formControlName="password"
+        type="password"
+        label="Contraseña"
+        placeholder="Mínimo 6 caracteres"
+        [required]="true"
+        [invalid]="passwordCtrl.invalid && passwordCtrl.touched"
+        [fluid]="true"
+      />
+      @if (passwordCtrl.invalid && passwordCtrl.touched) {
+        <p class="text-red-500 text-sm -mt-3" role="alert">
+          @if (passwordCtrl.hasError('required')) {
+            La contraseña es obligatoria.
+          } @else if (passwordCtrl.hasError('minlength')) {
+            Mínimo 6 caracteres.
+          }
+        </p>
+      }
+
+      <div class="flex gap-3">
+        <button type="submit" class="p-button">Enviar</button>
+        <button type="button" class="p-button p-button-outlined" (click)="form.reset()">
+          Limpiar
+        </button>
+      </div>
+    </form>
+
+    <pre class="mt-4 p-3 bg-surface-100 rounded text-xs">form.value = {{ form.value | json }}</pre>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       2. SIGNAL MODEL  [(value)]  – sin formulario
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="model-heading">
+    <h2 id="model-heading" class="text-lg font-semibold mb-4">
+      2. Signal model <code>[(value)]</code>
+    </h2>
+
+    <lgc-input
+      [(value)]="username"
+      label="Nombre de usuario"
+      placeholder="Escribe tu nombre…"
+      hint="Este campo no está vinculado a ningún formulario."
+      [fluid]="true"
+    />
+
+    <p class="mt-3 text-sm">
+      Valor actual: <strong>{{ username() || '–' }}</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       3. TEMPLATE-DRIVEN  [(ngModel)]
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="ngmodel-heading">
+    <h2 id="ngmodel-heading" class="text-lg font-semibold mb-4">
+      3. Template-driven <code>[(ngModel)]</code>
+    </h2>
+
+    <form>
+      <lgc-input
+        name="search"
+        [(ngModel)]="ngModelValue"
+        label="Buscar"
+        placeholder="Escribe para buscar…"
+        [fluid]="true"
+      />
+    </form>
+
+    <p class="mt-3 text-sm">
+      ngModel value: <strong>{{ ngModelValue || '–' }}</strong>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       4. ESTADOS especiales
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="states-heading">
+    <h2 id="states-heading" class="text-lg font-semibold mb-4">4. Estados</h2>
+
+    <div class="flex flex-col gap-4">
+      <lgc-input label="Deshabilitado" [disabled]="true" placeholder="No editable" />
+      <lgc-input
+        label="Inválido"
+        [invalid]="true"
+        placeholder="Campo con error"
+        hint="Este campo tiene un error."
+      />
+      <lgc-input label="Sin label" placeholder="Sin label visible" />
+      <lgc-input label="Password" type="password" placeholder="••••••••" />
+    </div>
+  </section>
+</div>
