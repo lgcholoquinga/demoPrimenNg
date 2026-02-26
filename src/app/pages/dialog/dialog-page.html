@@ -1,0 +1,118 @@
+<div class="mt-6 flex flex-col gap-8 max-w-xl mx-auto">
+
+  <!-- 1. Wrapper estático — contenido simple -->
+  <section class="flex flex-col gap-3">
+    <h2 class="text-lg font-semibold">1. Wrapper estático — contenido simple</h2>
+    <p class="text-sm text-gray-600">
+      Uso directo de <code class="bg-gray-100 px-1 rounded">lgc-dialog</code> en el template.
+    </p>
+    <div>
+      <p-button label="Abrir" (click)="simpleVisible.set(true)" />
+    </div>
+  </section>
+
+  <!-- 2. Wrapper estático — footer custom -->
+  <section class="flex flex-col gap-3">
+    <h2 class="text-lg font-semibold">2. Wrapper estático — footer personalizado</h2>
+    <p class="text-sm text-gray-600">
+      Proyecta <code class="bg-gray-100 px-1 rounded">#lgcFooter</code> como template ref.
+    </p>
+    <div>
+      <p-button label="Abrir" severity="secondary" (click)="footerVisible.set(true)" />
+    </div>
+  </section>
+
+  <!-- 3. Wrapper estático — maximizable -->
+  <section class="flex flex-col gap-3">
+    <h2 class="text-lg font-semibold">3. Wrapper estático — maximizable</h2>
+    <p class="text-sm text-gray-600">
+      Props <code class="bg-gray-100 px-1 rounded">maximizable</code>,
+      <code class="bg-gray-100 px-1 rounded">resizable</code> y
+      <code class="bg-gray-100 px-1 rounded">draggable</code>.
+    </p>
+    <div>
+      <p-button label="Abrir" severity="help" (click)="maximizableVisible.set(true)" />
+    </div>
+  </section>
+
+  <!-- 4. DialogService — solo config -->
+  <section class="flex flex-col gap-3">
+    <h2 class="text-lg font-semibold">4. DialogService — solo config</h2>
+    <p class="text-sm text-gray-600">
+      Abre el dialog vía servicio sin componente dinámico. El body quedará vacío.
+    </p>
+    <div>
+      <p-button label="Abrir" severity="info" (click)="openConfigOnly()" />
+    </div>
+  </section>
+
+  <!-- 5. DialogService — componente dinámico -->
+  <section class="flex flex-col gap-3">
+    <h2 class="text-lg font-semibold">5. DialogService — componente dinámico</h2>
+    <p class="text-sm text-gray-600">
+      Inyecta <code class="bg-gray-100 px-1 rounded">DIALOG_DATA</code> y
+      <code class="bg-gray-100 px-1 rounded">DialogRef</code> en
+      <code class="bg-gray-100 px-1 rounded">DialogDetailComponent</code>.
+    </p>
+    <div>
+      <p-button label="Abrir DetailComponent" severity="success" (click)="openWithComponent()" />
+    </div>
+  </section>
+
+  <!-- Log de eventos -->
+  <section class="flex flex-col gap-2">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Log de eventos</h2>
+      @if (log().length > 0) {
+        <p-button label="Limpiar" severity="secondary" size="small" (click)="log.set([])" />
+      }
+    </div>
+    @if (log().length === 0) {
+      <p class="text-sm text-gray-400 italic">Sin eventos aún.</p>
+    } @else {
+      <ul class="text-sm space-y-1">
+        @for (entry of log(); track $index) {
+          <li class="bg-gray-100 rounded px-3 py-1.5 font-mono">{{ entry }}</li>
+        }
+      </ul>
+    }
+  </section>
+
+</div>
+
+<!-- ── Instancias estáticas de lgc-dialog ── -->
+
+<lgc-dialog
+  [(visible)]="simpleVisible"
+  header="Dialog simple"
+  (onHide)="addLog('Estático simple: cerrado')">
+  <p class="text-sm">
+    Este dialog usa <code>lgc-dialog</code> directamente en el template de la page.
+    Se cierra con la X o pulsando Escape.
+  </p>
+</lgc-dialog>
+
+<lgc-dialog
+  [(visible)]="footerVisible"
+  header="Dialog con footer"
+  (onHide)="addLog('Estático con footer: cerrado')">
+  <p class="text-sm">Contenido del dialog. El footer viene de un <code>#lgcFooter</code> template ref.</p>
+  <ng-template #lgcFooter>
+    <div class="flex justify-end gap-2">
+      <p-button label="Cancelar" severity="secondary" (click)="footerVisible.set(false)" />
+      <p-button label="Aceptar" (click)="footerVisible.set(false)" />
+    </div>
+  </ng-template>
+</lgc-dialog>
+
+<lgc-dialog
+  [(visible)]="maximizableVisible"
+  header="Dialog maximizable"
+  [maximizable]="true"
+  [resizable]="true"
+  [draggable]="true"
+  (onHide)="addLog('Maximizable: cerrado')">
+  <p class="text-sm">
+    Este dialog se puede arrastrar, redimensionar y maximizar con los botones del header.
+  </p>
+</lgc-dialog>

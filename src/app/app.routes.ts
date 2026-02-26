@@ -14,12 +14,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/radio-button/radio-button-page'),
   },
   {
+    path: 'dialog',
+    loadComponent: () => import('./pages/dialog/dialog-page'),
+  },
+  {
     path: '',
-    redirectTo: 'select',
+    redirectTo: 'dialog',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'select',
+    redirectTo: 'dialog',
   },
 ];
