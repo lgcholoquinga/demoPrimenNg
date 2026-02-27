@@ -14,8 +14,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/radio-button/radio-button-page'),
   },
   {
-    path: 'dialog',
-    loadComponent: () => import('./pages/dialog/dialog-page'),
+    path: 'dialog2',
+    loadComponent: () => import('./pages/pbo-dialog-page/pbo-dialog-page'),
   },
   {
     path: '',

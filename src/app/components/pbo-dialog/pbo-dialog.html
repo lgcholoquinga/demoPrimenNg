@@ -1,0 +1,38 @@
+<p-dialog
+  [modal]="true"
+  [(visible)]="visible"
+  [closable]="false"
+  [draggable]="false"
+  appendTo="body"
+  styleClass="w-full md:w-[560px]"
+>
+  @if (icon() || title()) {
+    <ng-template #header>
+      @if (icon()) {
+        icon
+      }
+
+      @if (title()) {
+        <h1>{{ title() }}</h1>
+      }
+    </ng-template>
+  }
+
+  @if (description()) {
+    <p>{{ description() }}</p>
+  }
+
+  @if (question()) {
+    <p>{{ question() }}</p>
+  }
+
+  <ng-content />
+
+  @if (actionsDialog().length > 0) {
+    <ng-template #footer>
+      @for (item of actionsDialog(); track $index) {
+        <p-button [label]="item.label" (onClick)="onHandleClick(item)" />
+      }
+    </ng-template>
+  }
+</p-dialog>

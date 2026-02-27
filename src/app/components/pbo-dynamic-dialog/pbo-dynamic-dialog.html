@@ -1,0 +1,14 @@
+<pbo-dialog
+  [visible]="dialog.visible()"
+  [title]="dialog.config().title"
+  [description]="dialog.config().description"
+  [question]="dialog.config().question"
+  [icon]="dialog.config().icon"
+  [iconStyleClass]="dialog.config().iconStyleClass ?? ''"
+  [actions]="dialog.config().actions"
+  (visibleChange)="onVisibleChange($event)"
+  (pboClose)="dialog.close()"
+  (pboClick)="dialog.handleAction($event)"
+>
+  <ng-container #customTemplate></ng-container>
+</pbo-dialog>

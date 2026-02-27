@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LgcDynamicDialog } from './components/lgc-dynamic-dialog/lgc-dynamic-dialog';
+import { PboDynamicDialog } from './components/pbo-dynamic-dialog/pbo-dynamic-dialog';
 
 @Component({
   selector: 'lgc-root',
-  imports: [RouterOutlet, LgcDynamicDialog],
+  imports: [RouterOutlet, PboDynamicDialog],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
