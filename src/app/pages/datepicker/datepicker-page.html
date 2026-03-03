@@ -1,0 +1,148 @@
+<div class="p-6 flex flex-col gap-10 max-w-2xl mx-auto">
+  <h1 class="text-2xl font-bold">lgc-datepicker – demos de uso</h1>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       1. REACTIVE FORMS  (formControlName)
+  ════════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="reactive-heading">
+    <h2 id="reactive-heading" class="text-lg font-semibold mb-4">1. Reactive form</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+      <lgc-datepicker
+        formControlName="birthdate"
+        label="Fecha de nacimiento"
+        placeholder="dd/mm/aaaa"
+        hint="Selecciona tu fecha de nacimiento."
+        [showIcon]="true"
+        [showClear]="true"
+        [required]="true"
+        [invalid]="birthdateCtrl.invalid && (birthdateCtrl.touched || formSubmitted)"
+        [fluid]="true"
+      />
+      @if (birthdateCtrl.invalid && (birthdateCtrl.touched || formSubmitted)) {
+        <p class="text-red-500 text-sm -mt-3" role="alert">
+          La fecha de nacimiento es obligatoria.
+        </p>
+      }
+
+      <lgc-datepicker
+        formControlName="appointment"
+        label="Cita (opcional)"
+        placeholder="dd/mm/aaaa"
+        [showIcon]="true"
+        [fluid]="true"
+      />
+
+      <div class="flex gap-3">
+        <button type="submit" class="p-button">Enviar</button>
+        <button type="button" class="p-button p-button-outlined" (click)="onReset()">
+          Limpiar
+        </button>
+      </div>
+    </form>
+
+    <pre class="mt-4 p-3 bg-surface-100 rounded text-xs overflow-auto">
+birthdate: {{ birthdateCtrl.value | date: 'dd/MM/yyyy' }}
+appointment: {{ appointmentCtrl.value | date: 'dd/MM/yyyy' }}
+valid: {{ form.valid }}</pre
+    >
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       2. SIGNAL MODEL  [(value)]
+  ════════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="signal-heading">
+    <h2 id="signal-heading" class="text-lg font-semibold mb-4">
+      2. Signal model <code>[(value)]</code>
+    </h2>
+
+    <lgc-datepicker
+      [(value)]="signalDate"
+      label="Fecha con signal"
+      placeholder="dd/mm/aaaa"
+      hint="Vinculado directamente a una señal, sin formulario."
+      [showIcon]="true"
+      [showClear]="true"
+      [fluid]="true"
+    />
+
+    <p class="mt-3 text-sm">
+      Valor actual:
+      @if (signalDate()) {
+        <strong>{{ signalDate() | date: 'dd/MM/yyyy' }}</strong>
+      } @else {
+        <strong>–</strong>
+      }
+    </p>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       3. TEMPLATE-DRIVEN  [(ngModel)]
+  ════════════════════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="ngmodel-heading">
+    <h2 id="ngmodel-heading" class="text-lg font-semibold mb-4">
+      3. Template-driven <code>[(ngModel)]</code>
+    </h2>
+
+    <form>
+      <lgc-datepicker
+        name="ngdate"
+        [(ngModel)]="ngModelDate"
+        label="Fecha con ngModel"
+        placeholder="dd/mm/aaaa"
+        hint="Vinculado con ngModel en un formulario template-driven."
+        [showIcon]="true"
+        [showClear]="true"
+        [fluid]="true"
+      />
+    </form>
+
+    <p class="mt-3 text-sm">
+      ngModel value:
+      @if (ngModelDate) {
+        <strong>{{ ngModelDate | date: 'dd/MM/yyyy' }}</strong>
+      } @else {
+        <strong>–</strong>
+      }
+    </p>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       4. ESTADOS ESPECIALES
+  ════════════════════════════════════════════════════════════════════════ -->
+  <!-- <section aria-labelledby="states-heading">
+    <h2 id="states-heading" class="text-lg font-semibold mb-4">4. Estados especiales</h2>
+
+    <div class="flex flex-col gap-4">
+      <lgc-datepicker
+        label="Deshabilitado"
+        placeholder="No editable"
+        [disabled]="true"
+        [fluid]="true"
+      />
+
+      <lgc-datepicker
+        label="Inválido"
+        placeholder="Campo con error"
+        [invalid]="true"
+        hint="Este campo tiene un error de validación."
+        [fluid]="true"
+      />
+
+      <lgc-datepicker
+        label="Con icono y limpiar"
+        placeholder="Selecciona una fecha"
+        [showIcon]="true"
+        [showClear]="true"
+        [fluid]="true"
+      />
+
+      <lgc-datepicker
+        label="Sin label (standalone)"
+        placeholder="dd/mm/aaaa"
+        [showIcon]="true"
+        [fluid]="true"
+      />
+    </div>
+  </section> -->
+</div>

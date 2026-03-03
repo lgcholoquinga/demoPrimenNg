@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'datepicker',
+    loadComponent: () => import('./pages/datepicker/datepicker-page'),
+  },
+  {
     path: 'input',
     loadComponent: () => import('./pages/input/input-page'),
   },
