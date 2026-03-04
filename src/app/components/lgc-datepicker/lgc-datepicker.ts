@@ -16,6 +16,14 @@ let dpIdCounter = 0;
   imports: [DatePickerModule, FormsModule],
   templateUrl: './lgc-datepicker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [`
+    :host ::ng-deep .lgc-dp--invalid .p-datepicker-input {
+      border: 2px solid #c30000;
+    }
+    :host ::ng-deep .lgc-dp--invalid .p-datepicker-input::placeholder {
+      color: #c30000;
+    }
+  `],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

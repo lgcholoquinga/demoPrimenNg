@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-1" [class.w-full]="fluid()">
+<div class="flex flex-col gap-1" [class.w-full]="fluid()" [class.lgc-dp--invalid]="invalid()">
   @if (label()) {
     <label [for]="inputId()" class="font-medium text-sm">
       {{ label() }}
